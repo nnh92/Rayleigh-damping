@@ -1,8 +1,10 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-f = open("input1.inp", 'r').readlines()
-f2 = open("input2.inp", 'r').readlines()
+f = open("input.inp", 'r').readlines()
+
+mode1 = int(input("Nhap mode dao dong so 1:"))
+mode2 = int(input("Nhap mode dao dong so 2:"))
 
 def ReadFileF(f):
     lst = []
@@ -22,26 +24,26 @@ def generate_rayleigh_damping(f1, f2, h1, h2):
 def check_rayleigh_damping(alpha, beta, fi, x, y):
     zeta = alpha/4/np.pi/fi + beta*np.pi*fi
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(num='Rayleigh damping')
 
-    ax.plot(fi, zeta)
+    ax.plot(fi, zeta, color = 'magenta')
     ax.grid()
     ax.set_xlim(0,70)
     ax.set_ylim(0,0.2)
     ax.set(xlabel='Response angular frequency (Hz)', ylabel='Damping ratio (%)', title='Mass and Stiffness')
     
     ax2 = ax.twinx()
-    ax2.scatter(x, y,color = 'red')
+    ax2.scatter(x, y,color = 'orange', s = 3)
 
-    plt.text(45,0.14, "alpha = {}".format(round(alpha,6)))
-    plt.text(45,0.13, "beta  = {}".format(round(beta,6)))
+    plt.text(45,0.14, r'$\alpha$ = {}'.format(round(alpha,6)))
+    plt.text(45,0.13, r'$\beta$  = {}'.format(round(beta,6)))
 
     plt.show()
     plt.close()
 
-alpha, beta = generate_rayleigh_damping(float(f[0]), float(f[1]), float(f[2]), float(f[3]))
+x, y = ReadFileF(f)
 
-x, y = ReadFileF(f2)
+alpha, beta = generate_rayleigh_damping(float(x[mode1-1]), float(x[mode2-1]), float(y[mode1-1]), float(y[mode2-1]))
 
 fi = np.arange(0.01,70,0.005)
 check_rayleigh_damping(alpha, beta, fi, x, y)

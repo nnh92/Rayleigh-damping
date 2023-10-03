@@ -4,3 +4,15 @@ F = kx
 
 右辺は外力項ですが、このページでは外力が働かない自由振動の状態で記述しています。
 mx¨+kx=0
+x1 = x
+x2 = dx
+
+m*dx2 + k*x1 = 0
+
+dx2 = -k/m * x1
+
+
+Dao dong tat dan:
+m*dx2 + k*x1 + 2*alpha*m*dx= 0
+
+dx2 = -k/m * x1 - 2*alpha*m*dx
